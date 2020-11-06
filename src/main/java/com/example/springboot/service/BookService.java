@@ -1,20 +1,22 @@
 package com.example.springboot.service;
 
-import com.example.springboot.respository.BookRepository;
+import com.example.springboot.respository.IBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookService {
-    private BookRepository bookRepository;
+    private IBookRepository bookRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository){
+    public BookService(IBookRepository bookRepository){
         this.bookRepository = bookRepository;
     }
 
-    public String getBookFromRepository(String bookId){
+    public String getBook(String bookId){
         return bookRepository.getBook(bookId);
     }
+
+    public String deleteBook(String bookId){ return bookRepository.deleteBook(bookId); }
 
 }

@@ -4,6 +4,7 @@ import com.example.springboot.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/")
@@ -16,10 +17,16 @@ public class BooksController {
         this.bookService = bookService;
     }
 
-    @RequestMapping("/books/{id}")
+    @RequestMapping(value = "/books/{id}", method = {RequestMethod.DELETE})
+    public String deleteBook(
+            @PathVariable(value = "id") final String bookId) {
+        return bookService.deleteBook(bookId);
+    }
+
+    @RequestMapping(value = "/books/{id}", method = {RequestMethod.GET})
     public String getBook(
             @PathVariable(value = "id") final String bookId) {
-       return bookService.getBookFromRepository(bookId);
+       return bookService.getBook(bookId);
     }
 
     @RequestMapping("/authors/{id}")
